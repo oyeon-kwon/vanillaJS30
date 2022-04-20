@@ -22,8 +22,21 @@
 
   <style>
 
+    :root {
+      --spacing: 10px;
+      --base: #4000c7;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur))
+    }
+
     /*
       misc styles, nothing to do with CSS variables
+      css variable 속성을 활용하면 사용자 지정 CSS 속성을 활용할 수 있다.
     */
 
     body {
@@ -45,6 +58,17 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input')
+
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      console.log(this.value)
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
   </script>
 
 </body>
